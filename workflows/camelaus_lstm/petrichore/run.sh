@@ -9,6 +9,7 @@ directory=configs/spatial_split/twofold
 
 # Loop through YAML files and submit sbatch jobs
 for CONFIG_FILE in $(find $directory -name "*.yml"); do
-    sbatch job.slurm --export=CONFIG_FILE="$CONFIG_FILE"
+    echo
+    sbatch petrichore/job.slurm --export=CONFIG_FILE="$CONFIG_FILE"
     
 done
