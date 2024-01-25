@@ -21,7 +21,7 @@ def _get_args() -> dict:
     parser.add_argument('--gpu',
                         type=int,
                         help="GPU id to use. Overrides config argument 'device'. Use a value < 0 for CPU.")
-    parser.add_argument('--data_dir', type=str, default=None)
+    parser.add_argument('--data-dir', type=str, default=None)
 
     args = vars(parser.parse_args())
 
