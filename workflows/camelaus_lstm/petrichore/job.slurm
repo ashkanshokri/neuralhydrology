@@ -8,7 +8,6 @@
 #SBATCH --mem=20000
 #SBATCH --account=OD-221168
 #SBATCH --time=2:00:00
-#SBATCH --array=1-133
 
 
 #Rscript /datasets/work/lw-werp-cafs/work/rob635/Elasticity/Code/calibrate_GR4J_mk2.R $SLURM_ARRAY_TASK_ID $SLURM_ARRAY_TASK_ID
