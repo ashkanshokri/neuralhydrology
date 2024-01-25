@@ -18,4 +18,5 @@ cd /datasets/work/d61-coastal-forecasting-wp3/work/sho108/neuralhydrology/workfl
 
 #config_file=configs/spatial_split/twofold/spatial_twofold_0_p.yml # this will come from enviroment variable
 data_dir=/datasets/work/lw-hydrofct/work/template/Data/CAMELS_AUS
+echo $CONFIG_FILE
 python -m neuralhydrology.nh_run_data_dir train --config-file $CONFIG_FILE --data-dir $data_dir
