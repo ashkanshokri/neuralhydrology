@@ -17,3 +17,6 @@ configs/*
 .ipynb_checkpoints/
 data/*
 docs/build/*
+
+TODO
+.venv

@@ -18,7 +18,8 @@ def _get_args() -> dict:
     parser.add_argument('--run-dir', type=str)
     parser.add_argument('--epoch', type=int, help="Epoch, of which the model should be evaluated")
     parser.add_argument('--period', type=str, choices=["train", "validation", "test"], default="test")
-    parser.add_argument('--gpu', type=int,
+    parser.add_argument('--gpu',
+                        type=int,
                         help="GPU id to use. Overrides config argument 'device'. Use a value < 0 for CPU.")
     args = vars(parser.parse_args())
 
@@ -166,7 +167,7 @@ def eval_run(run_dir: Path, period: str, epoch: int = None, gpu: int = None):
     if gpu is not None and gpu < 0:
         config.device = "cpu"
 
-    start_evaluation(cfg=config, run_dir=run_dir, epoch=epoch, period=period)
+    return start_evaluation(cfg=config, run_dir=run_dir, epoch=epoch, period=period)
 
 
 if __name__ == "__main__":
