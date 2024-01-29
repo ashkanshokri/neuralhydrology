@@ -35,19 +35,6 @@ def train_and_evaluate(fold, predictors, config_file):
     # Start training
     start_training(cfg)
 
-    # Get the latest run directory
-    run_dir = get_latest_touched_directory('runs')
-
-    # Evaluate on test set
-    ote = eval_run(run_dir=run_dir, period='test')
-
-    # Evaluate on validation set
-    ova = eval_run(run_dir=run_dir, period='validation')
-
-    # Evaluate on train set
-    otr = eval_run(run_dir=run_dir, period='train')
-
-    return ote, ova, otr
 
 
 config_file = Path('configs/config.yml')
