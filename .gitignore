@@ -20,4 +20,4 @@ docs/build/*
 
 TODO
 .venv
-*.out
+**/*.out

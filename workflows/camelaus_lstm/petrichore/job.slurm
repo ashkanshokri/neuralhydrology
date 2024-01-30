@@ -8,8 +8,8 @@
 #SBATCH --mem=20000
 #SBATCH --account=OD-221168
 #SBATCH --time=24:00:00
-#SBATCH --output=./reports/output_%a_%j.out
-#SBATCH --error=./reports/error_%a_%j.out
+#SBATCH --output=./reports/output_%a_%j.o
+#SBATCH --error=./reports/error_%a_%j.e
 
 
 
