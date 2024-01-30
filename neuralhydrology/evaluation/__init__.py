@@ -31,5 +31,4 @@ def get_tester(cfg: Config, run_dir: Path, period: str, init_model: bool) -> Bas
         Tester = RegressionTester
     else:
         NotImplementedError(f"No evaluation method implemented for {cfg.head} head")
-
     return Tester(cfg=cfg, run_dir=run_dir, period=period, init_model=init_model)

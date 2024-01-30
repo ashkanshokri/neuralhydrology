@@ -78,7 +78,6 @@ def load_basin_id_encoding(run_dir: Path) -> Dict[str, int]:
                                     "Looked for (new) yaml file or (old) pickle file")
 
 
-
 def metrics_to_dataframe(results: dict, metrics: Iterable[str]) -> pd.DataFrame:
     """Extract all metric values from result dictionary and convert to pandas.DataFrame
 

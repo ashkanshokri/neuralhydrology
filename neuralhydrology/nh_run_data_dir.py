@@ -179,6 +179,8 @@ def eval_run(run_dir: Path, period: str, epoch: int = None, gpu: int = None, dat
     if data_dir is not None:
         config.update_config({'data_dir': data_dir})
 
+    config.update_config({'run_dir': run_dir})
+
     # check if a GPU has been specified as command line argument. If yes, overwrite config
     if gpu is not None and gpu >= 0:
         config.device = f"cuda:{gpu}"
