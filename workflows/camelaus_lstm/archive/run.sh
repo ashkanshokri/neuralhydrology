@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 cd /datasets/work/d61-coastal-forecasting-wp3/work/sho108/neuralhydrology/workflows/camelaus_lstm/petrichore
