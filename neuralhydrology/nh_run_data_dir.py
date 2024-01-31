@@ -195,7 +195,7 @@ def eval_run(run_dir: Path, period: str, epoch: int = None, gpu: int = None, dat
     return start_evaluation(cfg=config, run_dir=run_dir, epoch=epoch, period=period)
 
 
-def cached_eval_run(run_dir, period, *args, recalculate: bool = False, **kwargs) -> dict:
+def cached_eval_run(run_dir, period, recalculate: bool = False, **kwargs) -> dict:
     """
     Load cached data or generate and save if not found.
 
@@ -215,7 +215,7 @@ def cached_eval_run(run_dir, period, *args, recalculate: bool = False, **kwargs)
     pd.DataFrame
         DataFrame containing cached or generated data.
     """
-    postprocess_dir = Path(args[run_dir], "postprocess")
+    postprocess_dir = Path(run_dir, "postprocess")
     postprocess_dir.mkdir(exist_ok=True, parents=True)
 
     cache_file = postprocess_dir / f"{period}_cached_data.pkl"
