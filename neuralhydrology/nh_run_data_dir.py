@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 import argparse
+import pickle
 import sys
 from pathlib import Path
+import typing
+
+import pandas as pd
 
 # make sure code directory is in path, even if the package is not installed using the setup.py
 sys.path.append(str(Path(__file__).parent.parent))
@@ -84,6 +88,7 @@ def start_run(config_file: Path, gpu: int = None, data_dir: str = None):
         config.device = "cpu"
 
     start_training(config)
+    print(f'run_dir:{config.run_dir}')
 
 
 def continue_run(run_dir: Path, config_file: Path = None, gpu: int = None, data_dir: str = None):
@@ -188,6 +193,43 @@ def eval_run(run_dir: Path, period: str, epoch: int = None, gpu: int = None, dat
         config.device = "cpu"
 
     return start_evaluation(cfg=config, run_dir=run_dir, epoch=epoch, period=period)
+
+
+def cached_eval_run(run_dir, period, *args, recalculate: bool = False, **kwargs) -> dict:
+    """
+    Load cached data or generate and save if not found.
+
+    Parameters
+    ----------
+    run_dir : Path
+        Path to the run directory.
+    period : {'train', 'validation', 'test'}
+        The period to load or generate data for.
+    data_dir : str, optional
+        Directory containing the data. If provided, it updates the 'data_dir' in the configuration.
+    recalculate : bool, optional
+        If True, forces recalculation of data even if cached data is available.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing cached or generated data.
+    """
+    postprocess_dir = Path(args[run_dir], "postprocess")
+    postprocess_dir.mkdir(exist_ok=True, parents=True)
+
+    cache_file = postprocess_dir / f"{period}_cached_data.pkl"
+
+    if not recalculate and cache_file.is_file():
+        print(f"Loading cached data for {period} from {cache_file}")
+        with open(cache_file, 'rb') as file:
+            return pickle.load(file)
+    else:
+        print(f"Cached data for {period} not found or recalculation forced. Generating and saving...")
+        data = eval_run(run_dir, period, **kwargs)
+        with open(cache_file, 'wb') as file:
+            pickle.dump(data, file)
+        return data
 
 
 if __name__ == "__main__":
