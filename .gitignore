@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # file extensions
 **/*.pyc
 **/*.h5
@@ -22,24 +21,3 @@ docs/build/*
 TODO
 .venv
 **/*.out
-=======
-# file extensions
-**/*.pyc
-**/*.h5
-**/*.p
-!test/test_data/*.p
-*.swp
-.coverage
-
-# folder
-build/*
-dist/*
-neuralhydrology.egg-info/*
-.vscode/*
-.idea/*
-runs/
-configs/*
-.ipynb_checkpoints/
-data/*
-docs/build/*
->>>>>>> Stashed changes
