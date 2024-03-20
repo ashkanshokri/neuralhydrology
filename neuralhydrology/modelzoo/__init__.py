@@ -4,10 +4,12 @@ import torch.nn as nn
 
 from neuralhydrology.modelzoo.arlstm import ARLSTM
 from neuralhydrology.modelzoo.cudalstm import CudaLSTM
+from neuralhydrology.modelzoo.mamba import Mamba
 from neuralhydrology.modelzoo.customlstm import CustomLSTM
 from neuralhydrology.modelzoo.ealstm import EALSTM
 from neuralhydrology.modelzoo.embcudalstm import EmbCudaLSTM
 from neuralhydrology.modelzoo.handoff_forecast_lstm import HandoffForecastLSTM
+from neuralhydrology.modelzoo.hybridmodel import HybridModel
 from neuralhydrology.modelzoo.gru import GRU
 from neuralhydrology.modelzoo.mclstm import MCLSTM
 from neuralhydrology.modelzoo.mtslstm import MTSLSTM
@@ -19,18 +21,8 @@ from neuralhydrology.modelzoo.transformer import Transformer
 from neuralhydrology.utils.config import Config
 
 SINGLE_FREQ_MODELS = [
-    "cudalstm", 
-    "ealstm", 
-    "customlstm", 
-    "embcudalstm", 
-    "gru", 
-    "transformer", 
-    "mclstm", 
-    "arlstm",
-    "handoff_forecast_lstm",
-    "sequential_forecast_lstm",
-    "multihead_forecast_lstm",
-    "stacked_forecast_lstm"
+    "cudalstm", "ealstm", "customlstm", "embcudalstm", "gru", "transformer", "mamba", "mclstm", "arlstm",
+    "handoff_forecast_lstm", "sequential_forecast_lstm", "multihead_forecast_lstm", "stacked_forecast_lstm"
 ]
 AUTOREGRESSIVE_MODELS = ['arlstm']
 
@@ -82,6 +74,8 @@ def get_model(cfg: Config) -> nn.Module:
         model = MCLSTM(cfg=cfg)
     elif cfg.model.lower() == "transformer":
         model = Transformer(cfg=cfg)
+    elif cfg.model.lower() == "mamba":
+        model = Mamba(cfg=cfg)
     elif cfg.model.lower() == "handoff_forecast_lstm":
         model = HandoffForecastLSTM(cfg=cfg)
     elif cfg.model.lower() == "multihead_forecast_lstm":
@@ -90,6 +84,8 @@ def get_model(cfg: Config) -> nn.Module:
         model = SequentialForecastLSTM(cfg=cfg)
     elif cfg.model.lower() == "stacked_forecast_lstm":
         model = StackedForecastLSTM(cfg=cfg)
+    elif cfg.model.lower() == "hybrid_model":
+        model = HybridModel(cfg=cfg)
     else:
         raise NotImplementedError(f"{cfg.model} not implemented or not linked in `get_model()`")
 
