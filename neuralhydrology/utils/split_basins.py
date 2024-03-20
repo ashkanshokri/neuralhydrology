@@ -81,7 +81,11 @@ import random
 from typing import List
 
 
-def k_fold_split_basins(input_file: str, output_directory: str, k: int, folds_not_equal_ok: bool = False) -> None:
+def k_fold_split_basins(input_file: str,
+                        output_directory: str,
+                        k: int,
+                        folds_not_equal_ok: bool = False,
+                        seed: int = 42) -> None:
     """
     Read names from an input file, shuffle them, and split them into files
     based on specified split sizes. Write the split names to output files.
@@ -91,6 +95,7 @@ def k_fold_split_basins(input_file: str, output_directory: str, k: int, folds_no
     - output_directory (str): Path to the directory where output files will be created.
     - k (int): Number of folds for the split.
     - folds_not_equal_ok (bool): If True, allows unequal fold sizes. Default is False.
+    - seed (int): Seed number for random shuffling. Default is 42. None will run it without seed.
 
     Returns:
     None
@@ -98,6 +103,11 @@ def k_fold_split_basins(input_file: str, output_directory: str, k: int, folds_no
     # Read the names from the input file
     with open(input_file, 'r') as file:
         names = file.readlines()
+
+    # Set the seed for random shuffling
+    if seed is not None:
+        random.seed(seed)
+
     random.shuffle(names)
 
     # Calculate the split size

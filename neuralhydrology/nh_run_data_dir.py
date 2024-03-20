@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import neuralhydrology.training.loss
 import pickle
 import sys
 from pathlib import Path
